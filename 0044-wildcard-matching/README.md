@@ -40,3 +40,28 @@
 	<li><code>s</code> contains only lowercase English letters.</li>
 	<li><code>p</code> contains only lowercase English letters, <code>&#39;?&#39;</code> or <code>&#39;*&#39;</code>.</li>
 </ul>
+<p> MEMOIZATION
+Approach
+solve Function: This recursive function is used to check if a substring of str starting from the first character to index i matches a substring of pattern starting from the first character to index j. The function takes the string str, the pattern pattern, the indices i and j, and a memoization table dp as input.
+
+Base Cases: The function first checks for base cases:
+
+If both i and j are less than 0, it means both str and pattern are empty, so it returns true.
+If i is greater than or equal to 0 but j is less than 0, it means pattern is empty, so it returns false.
+If j is greater than or equal to 0 but i is less than 0, it checks if the remaining characters in pattern (from index 0 to j) are all '*' characters. If yes, it returns true; otherwise, it returns false.
+Memoization: Before proceeding with the recursive calls, the function checks if the result for the current i and j has already been computed and stored in the memoization table dp. If so, it directly returns the precomputed value to avoid redundant calculations.
+
+Recursive Calls: If the base cases are not satisfied, the function checks for the following conditions:
+
+If the current characters in str and pattern match (either the same character or '?' in the pattern), it makes a recursive call to solve with indices i-1 and j-1 to check the remaining substrings.
+If the current character in pattern is '', it makes two recursive calls to solve:
+One with index i-1 and the same index j to check if the '' matches a single character in str.
+Another with the same index i and index j-1 to check if the '*' matches a sequence of characters in str.
+If none of the above conditions match, it returns false, as the characters do not match.
+Memoization Update: After the recursive calls, the function updates the memoization table dp with the result for the current i and j and returns the result.
+
+isMatch Function: This function serves as an interface to call the solve function with the appropriate arguments. It initializes the memoization table dp, calls solve with s.length()-1, p.length()-1, and returns the result.
+
+Complexity
+Time complexity:0(N*M)
+Space complexity:0(N*M)</p>
